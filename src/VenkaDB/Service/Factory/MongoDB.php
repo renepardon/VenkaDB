@@ -1,9 +1,11 @@
 <?php
 
-namespace VenkaDB;
+namespace VenkaDB\Service\Factory;
 
-use PHPUnit_Framework_TestCase as TestCase;
-use Zend\ServiceManager\ServiceManager;
+use VenkaDB\ODM\Adapter\MongoDB as MongoDBAdapter;
+use VenkaDB\TransactionQueue;
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
  * ODM Library for different NoSQL databases.
@@ -25,34 +27,27 @@ use Zend\ServiceManager\ServiceManager;
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *
- * @package VenkaDB
+ * @package VenkaDB\Service\Factory
  * @author Christoph, René Pardon <christoph@renepardon.de>
  * @copyright 2014 by Christoph, René Pardon
  * @license http://www.gnu.org/licenses/lgpl-3.0.txt
  * @version 1.0
  * @link https://github.com/renepardon/VenkaDB
  */
-class VenkaDB extends TestCase
+class MongoDB implements FactoryInterface
 {
-    /**
-     * @var ServiceManager
-     */
-    protected $serviceManager;
-
-    /**
-     * @var ConfigurationFactory
-     */
-    protected $factory;
-     
-    public function setUp()
+    public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        global $moduleConfig;
+        $config = $serviceLocator->get('Config');
+        $options = $config['venkadb'];
+        $adapter = new MongoDBAdapter($options['adapters']['MongoDB']);
+        $queue = new TransactionQueue();
+        $service = new VenkaDB($options, $adapter, $queue);
 
-        $this->serviceManager = new ServiceManager();
-        $this->serviceManager->setService('Config', $moduleConfig);
-    }
+        if (true === $options['connectOnCreation']) {
+            $service->connect();
+        }
 
-    public function testNothing()
-    {
+        return $service;
     }
 }

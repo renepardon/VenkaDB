@@ -1,9 +1,6 @@
 <?php
 
-namespace VenkaDB;
-
-use PHPUnit_Framework_TestCase as TestCase;
-use Zend\ServiceManager\ServiceManager;
+namespace VenkaDB\Architecture;
 
 /**
  * ODM Library for different NoSQL databases.
@@ -25,34 +22,14 @@ use Zend\ServiceManager\ServiceManager;
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *
- * @package VenkaDB
+ * @package VenkaDB\Architecture
  * @author Christoph, René Pardon <christoph@renepardon.de>
  * @copyright 2014 by Christoph, René Pardon
  * @license http://www.gnu.org/licenses/lgpl-3.0.txt
  * @version 1.0
  * @link https://github.com/renepardon/VenkaDB
  */
-class VenkaDB extends TestCase
+interface GraphInterface
 {
-    /**
-     * @var ServiceManager
-     */
-    protected $serviceManager;
 
-    /**
-     * @var ConfigurationFactory
-     */
-    protected $factory;
-     
-    public function setUp()
-    {
-        global $moduleConfig;
-
-        $this->serviceManager = new ServiceManager();
-        $this->serviceManager->setService('Config', $moduleConfig);
-    }
-
-    public function testNothing()
-    {
-    }
 }

@@ -1,9 +1,6 @@
 <?php
 
-namespace VenkaDB;
-
-use PHPUnit_Framework_TestCase as TestCase;
-use Zend\ServiceManager\ServiceManager;
+namespace VenkaDB\Document;
 
 /**
  * ODM Library for different NoSQL databases.
@@ -32,27 +29,22 @@ use Zend\ServiceManager\ServiceManager;
  * @version 1.0
  * @link https://github.com/renepardon/VenkaDB
  */
-class VenkaDB extends TestCase
+interface ModelInterface
 {
     /**
-     * @var ServiceManager
+     * Gets the unique identifier for current document
+     *
+     * @return null|int|string
      */
-    protected $serviceManager;
+    public function getId();
 
     /**
-     * @var ConfigurationFactory
+     * Array representation of current Data object.
+     *
+     * From this point we are able to convert the data object into any type
+     * we want it to.
+     *
+     * @return mixed
      */
-    protected $factory;
-     
-    public function setUp()
-    {
-        global $moduleConfig;
-
-        $this->serviceManager = new ServiceManager();
-        $this->serviceManager->setService('Config', $moduleConfig);
-    }
-
-    public function testNothing()
-    {
-    }
+    public function toArray();
 }
