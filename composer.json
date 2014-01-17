@@ -1,0 +1,36 @@
+{
+    "name": "renepardon/VenkaDB",
+    "description": "ODM Library for different NoSQL databases.",
+    "type": "library",
+    "keywords": [
+        "library",
+        "VenkaDB"
+    ],
+    "homepage": "https://github.com/renepardon/VenkaDB",
+    "license": "LGPL-3.0",
+    "authors": [
+        {
+            "name": "Christoph, René Pardon",
+            "email": "christoph@renepardon.de",
+            "homepage": "http://www.renepardon.de"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "zendframework/zendframework": "2.*"
+    },
+    "require-dev": {
+        "phpunit/PHPUnit": "3.7.*"
+    },
+    "suggest": {
+        "zendframework/zendframework": "What a nice framework ;)"
+    },
+    "autoload": {
+        "psr-0": {
+            "VenkaDB": "src/"
+        }
+    },
+    "classmap": [
+        "./"
+    ]
+}
